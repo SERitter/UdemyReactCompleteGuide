@@ -59,27 +59,55 @@ const ExpenseForm = (props) => {
     // });
   };
 
+  // const inputChangeHandler = (identifier, value) => {
+  //   if (identifier ==='title') {
+  //     setEnteredTitle(value);
+  //   } else if (identifier === 'date'){
+  //     setEnteredDate(value);
+  //   } else {
+  //     setEnteredAmount(value);
+  //   }
+  // };
+
   const submitHandler = (event) => {
     event.preventDefault();
 
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount,
       date: new Date(enteredDate),
     };
 
     props.onSaveExpenseData(expenseData);
-    setEnteredTitle('');
-    setEnteredAmount('');
-    setEnteredDate('');
+    setEnteredTitle("");
+    setEnteredAmount("");
+    setEnteredDate("");
   };
+
+  // const cancelHandler = () => {
+  //   const expenseData = {
+  //     title: "",
+  //     amount: "",
+  //     date: new Date(""),
+  //   };
+
+  //   props.onSaveExpenseData(expenseData);
+  //   setEnteredTitle("");
+  //   setEnteredAmount("");
+  //   setEnteredDate("");
+  // };
 
   return (
     <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input type="text" value={enteredTitle} onChange={titleChangeHandler} />
+          <input
+            type="text"
+            value={enteredTitle}
+            onChange={titleChangeHandler}
+            // onChange={(event) => inputChangeHandler('title', event.target.value)}
+          />
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
@@ -103,6 +131,10 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        {/* <button onClick={cancelHandler}>Cancel</button> */}
+        <button type="button" onClick={props.onCancel}>
+          Cancel
+        </button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
